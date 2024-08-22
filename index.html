@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Play</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div id="select-pet">
+        <h1>Adopt Your Virtual Pet</h1>
+        <input type="text" id="choose-name" placeholder="Enter Your Pet Name" required>
+        <br><br>
+        <button onclick="choosePet('cat')">Cat</button>
+        <button onclick="choosePet('dog')">Dog</button>
+    </div>
+    <div id="pet-container" style="display: none">
+        <h1 id="pet-name"></h1>
+        <div id="pet-image-container" style="display: none">
+            <img id="pet-image" alt="My Virtual Pet" srcset="">
+        </div>
+        <audio id="pet-sound"></audio>
+        <div id="pet-mood">Mood <span id>Happy</span></div>
+        <div id="meters">
+            <div id="health-meter" class="meter">Health <span>100%</span></div>
+            <div id="hunger-meter" class="meter">Hunger <span>0%</span></div>
+            <div id="happiness-meter" class="meter">Happiness <span>100%</span></div>
+        </div>
+        
+        <div id="control-pet">
+            <button onclick="feedPet()" id="feed-button">Feed</button>
+            <button onclick="playPet()" id="play-button">Play</button>
+            <button onclick="cleanPet()" id="clean-button">Clean</button>
+            <button onclick="goBackToSelectPet()" id="back-button">Back to Select Pet</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
