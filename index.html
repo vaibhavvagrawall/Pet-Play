@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Play</title>
+
+    <!--CSS File-->
     <link rel="stylesheet" href="style.css">
     
 </head>
 <body>
+
+    <!-- Select Pet Box-->
     <div id="select-pet">
         <h1>Adopt Your Virtual Pet</h1>
         <input type="text" id="choose-name" placeholder="Enter Your Pet Name" required>
@@ -15,26 +19,44 @@
         <button onclick="choosePet('cat')">Cat</button>
         <button onclick="choosePet('dog')">Dog</button>
     </div>
+
+    <!--Pet Container-->
     <div id="pet-container" style="display: none">
+
+        <!--Pet Name-->
         <h1 id="pet-name"></h1>
+
+        <!--Pet Image Container-->
         <div id="pet-image-container" style="display: none">
             <img id="pet-image" alt="My Virtual Pet" srcset="">
         </div>
+
+        <!--Pet Sound-->
         <audio id="pet-sound"></audio>
-        <div id="pet-mood">Mood <span id>Happy</span></div>
+
+        <!--Pet Mood-->
+        <div id="pet-mood">Mood <span id></span></div>
+
+        <!--Pet Meter Container-->
         <div id="meters">
-            <div id="health-meter" class="meter">Health <span>100%</span></div>
-            <div id="hunger-meter" class="meter">Hunger <span>0%</span></div>
-            <div id="happiness-meter" class="meter">Happiness <span>100%</span></div>
+            <label for="health-meter"> Health </label>
+            <progress id="health-meter" class="meter" min="0" max="100" value=""></progress>
+            <label for="hunger-meter"> Hunger </label>
+            <progress id="hunger-meter" class="meter" min="0" max="100" value=""></progress>
+            <label for="happiness-meter"> Happiness </label>
+            <progress id="happiness-meter" class="meter" min="0" max="100" value=""></progress>
         </div>
         
+        <!--Pet Activities-->
         <div id="control-pet">
-            <button onclick="feedPet()" id="feed-button">Feed</button>
-            <button onclick="playPet()" id="play-button">Play</button>
-            <button onclick="cleanPet()" id="clean-button">Clean</button>
-            <button onclick="goBackToSelectPet()" id="back-button">Back to Select Pet</button>
+            <button onclick="feedPet()">Feed</button>
+            <button onclick="playPet()">Play</button>
+            <button onclick="cleanPet()">Clean</button>
+            <button onclick="goBackToSelectPet()">Back to Select Pet</button>
         </div>
     </div>
+
+    <!--JS File-->
     <script src="script.js"></script>
 </body>
 </html>

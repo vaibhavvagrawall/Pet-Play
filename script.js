@@ -33,6 +33,12 @@ function choosePet(pet){
     petImageContainer.style.display = 'block';
     petContainer.style.display = 'block';
     selectPet.style.display = 'none';
+
+    //Initilaise the pet meters and mood
+    updateMeters();
+
+    //this is used to set an interval of 3 seconds and after each interval decrease stats fucntion is called
+    intervalId = setInterval(decreaseStats,1000);
 }
 
 // play pet function -> this function is to play the sound of the pet when the cursor hover on its picture
@@ -63,6 +69,8 @@ function goBackToSelectPet() {
 
     petContainer.style.display = 'none';
     selectPet.style.display = 'block';
+
+    clearInterval(intervalId);
 }
 
 // fetching the position to change the mood
@@ -87,17 +95,12 @@ let health = 100;
 let hunger = 0;
 let happiness = 100;
 
-//meter display -> this is to fetch the position to update the new value
-const healthMeter = document.getElementById('health-meter').querySelector('span');
-const hungerMeter = document.getElementById('hunger-meter').querySelector('span');
-const happinessMeter = document.getElementById('happiness-meter').querySelector('span');
-
 // feed pet funcion -> when feed button is clicked then this function is called which decrease hunger and increase health and happiness
 function feedPet(){
     if (hunger > 0){
-        hunger = Math.max(hunger - 5, 0);
-        health = Math.min(health + 5, 100);
-        happiness = Math.min(happiness + 5, 100);
+        hunger = Math.max(hunger - 3, 0);
+        health = Math.min(health + 3, 100);
+        happiness = Math.min(happiness + 3, 100);
         updateMeters();
     }
 }
@@ -105,9 +108,9 @@ function feedPet(){
 // play pet funcion -> when play button is clicked then this function is called which increase hunger and increase health and happiness
 function playPet(){
     if (happiness < 100){
-        happiness = Math.min(happiness + 5, 100);
-        health = Math.min(health + 5, 100);
-        hunger = Math.min(hunger + 5, 100);
+        happiness = Math.min(happiness + 3, 100);
+        health = Math.min(health + 3, 100);
+        hunger = Math.min(hunger + 3, 100);
         updateMeters();
     }
 }
@@ -115,20 +118,24 @@ function playPet(){
 // clean pet funcion -> when clean button is clicked then this function is called which and increase health and happiness
 function cleanPet(){
     if (health < 100){
-        health = Math.min(health + 5, 100);
-        happiness = Math.min(happiness + 5, 100);
+        health = Math.min(health + 3, 100);
+        happiness = Math.min(happiness + 3, 100);
         updateMeters();
     }
 }
 
 // update meter function -> this is used to update the new values for health, hunger and happiness and also changes color of the text according to the value
 function updateMeters() {
-    healthMeter.textContent = `${health}%`;
-    hungerMeter.textContent = `${hunger}%`;
-    happinessMeter.textContent = `${happiness}%`;
-    healthMeter.parentNode.style.color = health > 50 ? '#28a745' : '#dc3545';
-    hungerMeter.parentNode.style.color = hunger < 50 ? '#28a745' : '#dc3545';
-    happinessMeter.parentNode.style.color = happiness > 50 ? '#28a745' : '#dc3545';
+    //meter display -> this is to fetch the position to update the new value
+    const healthMeter = document.getElementById('health-meter')
+    const hungerMeter = document.getElementById('hunger-meter')
+    const happinessMeter = document.getElementById('happiness-meter')
+
+    healthMeter.value = health;
+    hungerMeter.value = hunger;
+    happinessMeter.value = happiness;
+
+    // Pet Mood
     const mood = determineMood();
     petMood.textContent = mood;
 
@@ -137,14 +144,9 @@ function updateMeters() {
 //this function is called to regularly decrease health and happiness meter and increase hunger meter.
 function decreaseStats(){
     if(health > 0){
-        hunger = Math.min(hunger + 3, 100);
-        happiness = Math.max(happiness - 3, 0);
-        health = Math.max(health - 3, 0);
+        hunger = Math.min(hunger + 0.5, 100);
+        happiness = Math.max(happiness - 0.5, 0);
+        health = Math.max(health - 0.5, 0);
         updateMeters();
     }
 }
-
-//this is used to set an interval of 3 seconds and after each interval decrease stats fucntion is called
-setInterval(decreaseStats,3000);
-
- 
